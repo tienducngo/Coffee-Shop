@@ -1,0 +1,41 @@
+﻿@model QLCP.Models.Bàn
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn muốn xóa bàn này chứ?</h3>
+<div>
+    <h4>Bàn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Trạng thái")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trạng_thái)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tên bàn")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tên_bàn)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default btn-danger" /> |
+            <a class="btn btn-default btn-primary" @Html.ActionLink("Quay lại danh sách", "Index")
+        </div>
+    }
+</div>

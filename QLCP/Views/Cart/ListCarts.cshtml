@@ -1,0 +1,64 @@
+﻿@model IEnumerable<cp.Models.CartModel>
+
+@{
+    ViewBag.Title = "ListCarts";
+}
+
+<h2>Giỏ hàng</h2>
+<a class="btn btn-default btn btn-primary" href="https://localhost:44342/S%E1%BA%A3n_ph%E1%BA%A9m1">Quay lại danh sách &raquo;</a></p></td>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<table class="table">
+    <tr>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black">
+            @Html.DisplayName("Mã sản phẩm")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black ">
+            @Html.DisplayName("Tên sản phẩm")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+            @Html.DisplayName("Đơn giá")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+            @Html.DisplayName("Số lượng")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+            @Html.DisplayName("Thành tiền")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Mã_sản_phẩm)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Tên_sản_phẩm)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Đơn_giá)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+                @Html.DisplayFor(modelItem => item.Số_lượng)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black; border-right: 1px solid black ">
+                @Html.DisplayFor(modelItem => item.Thành_tiền)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("Delete", "Delete")*@
+            </td>
+        </tr>
+    }
+    <tr style="border-left: 1px solid black; border-bottom: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black">
+        <td colspan="2">Số lượng sản phẩm: @ViewBag.CoutSP</td>
+        <td colspan="2">Thành tiền: @ViewBag.Total</td>
+        <td colspan="2"><p><a class="btn btn-default btn btn-primary" href="https://localhost:44342/%C4%90%E1%BA%B7t_H%C3%A0ng/Index">Đặt hàng &raquo;</a></p></td>
+    </tr>
+
+</table>

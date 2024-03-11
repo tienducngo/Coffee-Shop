@@ -1,0 +1,57 @@
+﻿@model QLCP.Models.Hóa_đơn_bán
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Hóa_đơn_bán</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Ngày xuất hóa đơn")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngày_xuất_HĐ)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayName("Tên bàn")
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.Bàn.Tên_bàn)
+        </dd>*@
+
+        <dt>
+            @Html.DisplayName("Tên nhân viên")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nhân_viên.Tên_nhân_viên)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Tên sản phẩm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sản_phẩm.Tên_sản_phẩm)
+        </dd>
+        <dt>
+            @Html.DisplayName("Số lượng")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Số_lượng)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*<a class="btn btn-default btn-primary" @Html.ActionLink("Edit", "Edit", new { id = Model.Mã_HĐ })*@ <!--|-->
+    <a class="btn btn-default btn-primary"@Html.ActionLink("Quay lại danh sách", "Index")
+</p>

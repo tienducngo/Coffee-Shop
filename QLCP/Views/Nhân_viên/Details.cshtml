@@ -1,0 +1,42 @@
+﻿@model QLCP.Models.Nhân_viên
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Nhân viên</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Tên nhân viên")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tên_nhân_viên)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ngày vào làm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngày_vào_làm)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Vị trí")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vị_trí)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-default btn-primary" @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Mã_nhân_viên }) |
+    <a class="btn btn-default btn-primary"@Html.ActionLink("Quay lại danh sách", "Index")
+</p>

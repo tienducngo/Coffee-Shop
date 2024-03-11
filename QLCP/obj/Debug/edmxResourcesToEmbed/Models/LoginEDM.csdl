@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="User" />
+    </Key>
+    <Property Name="User" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bàn">
+    <Key>
+      <PropertyRef Name="Số_bàn" />
+    </Key>
+    <Property Name="Số_bàn" Type="Int32" Nullable="false" />
+    <Property Name="Tên_bàn" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Trạng_thái" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Nhân_viên">
+    <Key>
+      <PropertyRef Name="Mã_nhân_viên" />
+    </Key>
+    <Property Name="Mã_nhân_viên" Type="Int32" Nullable="false" />
+    <Property Name="Tên_nhân_viên" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Ngày_vào_làm" Type="DateTime" Precision="3" />
+    <Property Name="Vị_trí" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Hình" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hóa_đơn_bán" Relationship="QLBHModel.FK_Hóa_đơn_bán_Nhân_viên" FromRole="Nhân_viên" ToRole="Hóa_đơn_bán" />
+  </EntityType>
+  <EntityContainer Name="QLBHEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Bàn" EntityType="Self.Bàn" />
+    <EntitySet Name="Nhân_viên" EntityType="Self.Nhân_viên" />
+    <EntitySet Name="Sản_phẩm" EntityType="QLBHModel.Sản_phẩm" />
+    <EntitySet Name="Hóa_đơn_bán" EntityType="QLBHModel.Hóa_đơn_bán" />
+    <AssociationSet Name="FK_Hóa_đơn_bán_Nhân_viên" Association="QLBHModel.FK_Hóa_đơn_bán_Nhân_viên">
+      <End Role="Nhân_viên" EntitySet="Nhân_viên" />
+      <End Role="Hóa_đơn_bán" EntitySet="Hóa_đơn_bán" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hóa_đơn_bán_Sản_phẩm" Association="QLBHModel.FK_Hóa_đơn_bán_Sản_phẩm">
+      <End Role="Sản_phẩm" EntitySet="Sản_phẩm" />
+      <End Role="Hóa_đơn_bán" EntitySet="Hóa_đơn_bán" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="QLBHModel.sysdiagram" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QLBHModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QLBHModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <EntityType Name="Sản_phẩm">
+    <Key>
+      <PropertyRef Name="Mã_sản_phẩm" />
+    </Key>
+    <Property Name="Mã_sản_phẩm" Type="Int32" Nullable="false" />
+    <Property Name="Tên_sản_phẩm" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Giá_gốc" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Giá_bán" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Hình" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hóa_đơn_bán" Relationship="QLBHModel.FK_Hóa_đơn_bán_Sản_phẩm" FromRole="Sản_phẩm" ToRole="Hóa_đơn_bán" />
+  </EntityType>
+  <EntityType Name="Hóa_đơn_bán">
+    <Key>
+      <PropertyRef Name="Mã_HĐ" />
+    </Key>
+    <Property Name="Mã_HĐ" Type="Int32" Nullable="false" />
+    <Property Name="Mã_sản_phẩm" Type="Int32" Nullable="false" />
+    <Property Name="Ngày_xuất_HĐ" Type="DateTime" Precision="3" />
+    <Property Name="Mã_nhân_viên" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Nhân_viên" Relationship="QLBHModel.FK_Hóa_đơn_bán_Nhân_viên" FromRole="Hóa_đơn_bán" ToRole="Nhân_viên" />
+    <NavigationProperty Name="Sản_phẩm" Relationship="QLBHModel.FK_Hóa_đơn_bán_Sản_phẩm" FromRole="Hóa_đơn_bán" ToRole="Sản_phẩm" />
+    <Property Name="Ngày_xuất" Type="Int32" />
+    <Property Name="Số_lượng" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Hóa_đơn_bán_Nhân_viên">
+    <End Type="QLBHModel.Nhân_viên" Role="Nhân_viên" Multiplicity="1" />
+    <End Type="QLBHModel.Hóa_đơn_bán" Role="Hóa_đơn_bán" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nhân_viên">
+        <PropertyRef Name="Mã_nhân_viên" />
+      </Principal>
+      <Dependent Role="Hóa_đơn_bán">
+        <PropertyRef Name="Mã_nhân_viên" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hóa_đơn_bán_Sản_phẩm">
+    <End Type="QLBHModel.Sản_phẩm" Role="Sản_phẩm" Multiplicity="1" />
+    <End Type="QLBHModel.Hóa_đơn_bán" Role="Hóa_đơn_bán" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sản_phẩm">
+        <PropertyRef Name="Mã_sản_phẩm" />
+      </Principal>
+      <Dependent Role="Hóa_đơn_bán">
+        <PropertyRef Name="Mã_sản_phẩm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

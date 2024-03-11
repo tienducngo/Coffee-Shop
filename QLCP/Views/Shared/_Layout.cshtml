@@ -1,0 +1,77 @@
+﻿@{
+    bool isLoggedIn = true;
+    if (string.IsNullOrWhiteSpace(User.Identity.Name))
+    {
+        isLoggedIn = false;
+    }
+}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title  QUẢN LÝ CÀ PHÊ </title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+    <style type="text/css">
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .navbar-nav li a {
+            color: white !important;
+            font-weight: bold;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #8f713c; border-color: #8f713c ">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Trang chủ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Sản phẩm", "Index", "Sản_phẩm1")</li>
+                        <li>@Html.ActionLink("Bàn", "Index", "Bàn")</li>
+                        <li>@Html.ActionLink("Nhân viên", "Index", "Nhân_viên")</li>
+                        <li>@Html.ActionLink("Hóa đơn", "Index", "Hóa_đơn_bán1")</li>
+                        <li>@Html.ActionLink("Giỏ hàng", "ListCarts", "Cart")</li>
+                        @{
+                            if (isLoggedIn)
+                            {
+                                <li>@Html.ActionLink(User.Identity.Name, "Index", "Home")</li>
+                                <li>@Html.ActionLink("Đăng xuất", "Signout", "Acc")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Đăng nhập", "Login", "Acc")</li>
+                                <li>@Html.ActionLink("Đăng ký", "Signup", "Acc")</li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content" style="margin-bottom: 30px">
+            @RenderBody()
+            <hr />
+
+        </div>
+        <footer class="footer">
+            <p>&copy; @DateTime.Now.Year - Quản lý cà phê HT</p>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model QLCP.Models.Sản_phẩm
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Chi tiết món</h2>
+
+<div>
+    <h4>Sản phẩm</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Tên sản phẩm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tên_sản_phẩm)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Giá gốc")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Giá_gốc)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Giá bán")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Giá_bán)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hình)
+        </dt>
+
+        <dd>
+            <img src=@Url.Content("~/Upload/sanpham/" + Model.Hình) class="img-responsive img_custom" alt="" style="width: 30%" />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a class="btn btn-default btn-primary" @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Mã_sản_phẩm}) |
+    <a class="btn btn-default btn-primary" @Html.ActionLink("Quay lại danh sách", "Index")
+</p>

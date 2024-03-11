@@ -1,0 +1,65 @@
+﻿@model IEnumerable<QLCP.Models.Sản_phẩm>
+
+@{
+    ViewBag.Title = "Index";
+}
+@*<div>
+    <a class "jumbotron" 
+</div>*@
+<h2>Danh sách đồ uống và đồ ăn của quán</h2>
+
+<form method="post" action="@Url.Action("Thống_kê", "Thống_kê")">
+    <label for="month">Thống kê số lượng sản phẩm trong tháng. Hãy nhập tháng: </label>
+    <input type="number" id="month" name="month" />
+    <input type="submit" value="Tính" />
+</form>
+<p>
+    <a class="btn btn-default btn-primary" @Html.ActionLink("Thêm món mới", "Create")
+</p>
+</p>
+<table class="table">
+    <tr>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black">
+            @Html.DisplayName("Tên sản phẩm")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black ">
+            @Html.DisplayNameFor(model => model.Hình)
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black ">
+            @Html.DisplayName("Giá gốc")
+        </th>
+        <th style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black ">
+            @Html.DisplayName("Giá bán")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+            @Html.DisplayName("Các chức năng")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Tên_sản_phẩm)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @*<img style="width: 50px;height:50px" src="~/Upload/sanpham/@item.Hình" />*@
+                <img alt="List View" src="@Url.Content("~/Upload/sanpham/" + item.Hình)" style="width: 50px;height:50px">
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Giá_gốc)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Giá_bán)
+            </td>
+
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black ">
+        <a class="btn btn-default btn-primary"@Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Mã_sản_phẩm }) |
+        <a class="btn btn-default btn-primary"@Html.ActionLink("Chi tiết", "Details", new { id = item.Mã_sản_phẩm }) |
+        <a class="btn btn-default btn-primary"@Html.ActionLink("Xóa", "Delete", new { id = item.Mã_sản_phẩm }) |
+        <a class="btn btn-default btn-success"@Html.ActionLink("Thêm", "AddCarts", "Cart", new { id = item.Mã_sản_phẩm }, null)
+            </td>
+        </tr>
+    }
+
+</table>

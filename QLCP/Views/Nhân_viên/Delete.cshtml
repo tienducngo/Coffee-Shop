@@ -1,0 +1,49 @@
+﻿@model QLCP.Models.Nhân_viên
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn muốn xóa nhân viên này chứ?</h3>
+<div>
+    <h4>Nhân viên</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Tên nhân viên")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tên_nhân_viên)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ngày vào làm")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngày_vào_làm)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Vị trí")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vị_trí)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default btn-danger" /> |
+            <a class="btn btn-default btn-primary" @Html.ActionLink("Quay lại danh sách", "Index")
+        </div>
+    }
+</div>

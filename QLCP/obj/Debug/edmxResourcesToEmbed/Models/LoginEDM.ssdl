@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="User" />
+    </Key>
+    <Property Name="User" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bàn">
+    <Key>
+      <PropertyRef Name="Số bàn" />
+    </Key>
+    <Property Name="Số bàn" Type="int" Nullable="false" />
+    <Property Name="Tên bàn" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Trạng thái" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hóa đơn bán">
+    <Key>
+      <PropertyRef Name="Mã HĐ" />
+    </Key>
+    <Property Name="Mã HĐ" Type="int" Nullable="false" />
+    <Property Name="Mã sản phẩm" Type="int" Nullable="false" />
+    <Property Name="Ngày xuất HĐ" Type="datetime" />
+    <Property Name="Mã nhân viên" Type="int" Nullable="false" />
+    <Property Name="Ngày xuất" Type="int" />
+    <Property Name="Số lượng" Type="int" />
+  </EntityType>
+  <EntityType Name="Nhân viên">
+    <Key>
+      <PropertyRef Name="Mã nhân viên" />
+    </Key>
+    <Property Name="Mã nhân viên" Type="int" Nullable="false" />
+    <Property Name="Tên nhân viên" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="Ngày vào làm" Type="datetime" />
+    <Property Name="Vị trí" Type="nchar" MaxLength="20" />
+    <Property Name="Hình" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Sản phẩm">
+    <Key>
+      <PropertyRef Name="Mã sản phẩm" />
+    </Key>
+    <Property Name="Mã sản phẩm" Type="int" Nullable="false" />
+    <Property Name="Tên sản phẩm" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="Giá gốc" Type="money" />
+    <Property Name="Giá bán" Type="money" />
+    <Property Name="Hình" Type="nvarchar" MaxLength="225" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Hóa đơn bán_Nhân viên">
+    <End Role="Nhân viên" Type="Self.Nhân viên" Multiplicity="1" />
+    <End Role="Hóa đơn bán" Type="Self.Hóa đơn bán" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nhân viên">
+        <PropertyRef Name="Mã nhân viên" />
+      </Principal>
+      <Dependent Role="Hóa đơn bán">
+        <PropertyRef Name="Mã nhân viên" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hóa đơn bán_Sản phẩm">
+    <End Role="Sản phẩm" Type="Self.Sản phẩm" Multiplicity="1" />
+    <End Role="Hóa đơn bán" Type="Self.Hóa đơn bán" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sản phẩm">
+        <PropertyRef Name="Mã sản phẩm" />
+      </Principal>
+      <Dependent Role="Hóa đơn bán">
+        <PropertyRef Name="Mã sản phẩm" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="QLBHModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bàn" EntityType="Self.Bàn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Hóa đơn bán" EntityType="Self.Hóa đơn bán" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Nhân viên" EntityType="Self.Nhân viên" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sản phẩm" EntityType="Self.Sản phẩm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Hóa đơn bán_Nhân viên" Association="Self.FK_Hóa đơn bán_Nhân viên">
+      <End Role="Nhân viên" EntitySet="Nhân viên" />
+      <End Role="Hóa đơn bán" EntitySet="Hóa đơn bán" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hóa đơn bán_Sản phẩm" Association="Self.FK_Hóa đơn bán_Sản phẩm">
+      <End Role="Sản phẩm" EntitySet="Sản phẩm" />
+      <End Role="Hóa đơn bán" EntitySet="Hóa đơn bán" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

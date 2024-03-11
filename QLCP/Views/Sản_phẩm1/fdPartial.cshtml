@@ -1,0 +1,32 @@
+﻿<div class="row row_custom" style="margin-top: 20px;">
+    <div style="display: flex; justify-content: center;">
+        <div style=" width: 200px; border-bottom: 2px solid #8f713c" class="title_custom">
+            <a href="#" style="font-size: 20px; font-weight: bold; color: #8f713c"> ĐỒ ĂN, THỨC UỐNG </a>
+        </div>
+    </div>
+    @using (Html.BeginForm("Search", "Sản_phẩm1", FormMethod.Get))
+    {
+<div class="form_search" style="display: flex; margin-top : 20px" > 
+    <h3 style="margin: 0;padding: 0 20px 0 0">Tìm kiếm sản phẩm: </h3>  
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <div class="input-group-append _" ; text-align: center;>
+        <button style="margin-left: 10px" class="btn-success" type="submit">Tìm kiếm</button>
+    </div>
+
+</div>}
+    @foreach (var item in Model)
+    {
+<div class="col-md-3 col-sm-6 col_custom" style="margin-top: 30px;">
+    <a class="dt_custom" href="@Url.Action("Details",  new { id = item.Mã_sản_phẩm })">
+        <img src=@Url.Content("~/Upload/sanpham/" + item.Hình) class="img-responsive img_custom" alt="" style="width: 100%; height: 260px" />
+        <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+            <h3 style="margin-top: 20px; font-size: 18px; color: black">@item.Tên_sản_phẩm</h3>
+            <h3 style="color:red">Giá: @item.Giá_bán</h3>
+            <br />
+            @using (Html.BeginForm("AddCarts", "Cart", new { @id = item.Mã_sản_phẩm, @strURL = Request.Url.ToString() }))
+            {
+<button class="btn btn-default btn-primary" type="submit" style="font-size: 18px; color: #fff; ">Thêm vào giỏ</button>}
+        </div>
+    </a>
+</div>}
+</div>

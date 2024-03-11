@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QLCP.Models.Hóa_đơn_bán>
+
+@{
+    ViewBag.Title = "ListOrder";
+}
+
+<h2>ListOrder</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ngày_xuất_HĐ)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Bàn.Tên_bàn)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Nhân_viên.Tên_nhân_viên)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sản_phẩm.Tên_sản_phẩm)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ngày_xuất_HĐ)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Bàn.Tên_bàn)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Nhân_viên.Tên_nhân_viên)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sản_phẩm.Tên_sản_phẩm)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Mã_HĐ }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Mã_HĐ }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Mã_HĐ })
+        </td>
+    </tr>
+}
+
+</table>

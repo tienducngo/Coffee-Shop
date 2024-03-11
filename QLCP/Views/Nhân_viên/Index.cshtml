@@ -1,0 +1,56 @@
+﻿@model IEnumerable<QLCP.Models.Nhân_viên>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh sách nhân viên</h2>
+
+<p>
+    <a class="btn btn-default btn-primary" @Html.ActionLink("Thêm nhân viên", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black ">
+            @Html.DisplayName("Tên nhân viên")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black ">
+            @Html.DisplayNameFor(model => model.Hình)
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black">
+            @Html.DisplayName("Ngày vào làm")
+        </th>
+        <th style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+            @Html.DisplayName("Vị trí")
+        </th>
+        <th style="border-left: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; border-right: 1px solid black ">
+            @Html.DisplayName("Các chức năng")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Tên_nhân_viên)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                <img alt="List View" src="@Url.Content("~/Upload/nhanvien/" + item.Hình)" style="width: 50px;height:50px">
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Ngày_vào_làm)
+            </td>
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black">
+                @Html.DisplayFor(modelItem => item.Vị_trí)
+            </td>
+
+            <td style="border-left: 1px solid black; border-bottom: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black ">
+        <a class="btn btn-default btn-primary"@Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Mã_nhân_viên }) |
+        <a class="btn btn-default btn-primary"@Html.ActionLink("Chi tiết", "Details", new { id = item.Mã_nhân_viên }) |
+        <a class="btn btn-default btn-primary"@Html.ActionLink("Xóa", "Delete", new { id = item.Mã_nhân_viên })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f264394662c453ba970b9d1a3b43872" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="QLBHModel.Admin" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Bàn" Width="1.5" PointX="1.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Nhân_viên" Width="1.5" PointX="6.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Sản_phẩm" Width="1.5" PointX="1.25" PointY="3" />
+        <EntityTypeShape EntityType="QLBHModel.Hóa_đơn_bán" Width="1.5" PointX="4.375" PointY="0.5" />
+        <AssociationConnector Association="QLBHModel.FK_Hóa_đơn_bán_Nhân_viên" />
+        <AssociationConnector Association="QLBHModel.FK_Hóa_đơn_bán_Sản_phẩm" />
+        <EntityTypeShape EntityType="QLBHModel.sysdiagram" Width="1.5" PointX="3.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
